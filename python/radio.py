@@ -22,7 +22,7 @@
 # Handles all hardware- and source-related functionality
 # You pass it options, it gives you data.
 
-from gnuradio import gr, blocks, uhd, analog
+from gnuradio import gr, blocks, analog
 from gnuradio.filter import pfb, optfir
 from gnuradio.eng_option import eng_option
 from gnuradio.gr.pubsub import pubsub
@@ -176,7 +176,7 @@ class trunked_feed(gr.hier_block2, pubsub):
             rates = range(int(wat.start()), int(wat.stop()+1), int(wat.step()))
             acceptable_rates = [i for i in rates if i >= 8e6]
             if len(acceptable_rates) < 1: #we're in single-channel-only mode
-                acceptable_rates = (max(rates))
+                acceptable_rates = (max(rates),)
             src.set_sample_rate(min(acceptable_rates))
             src.get_samp_rate = src.get_sample_rate #alias for UHD compatibility in get_rate
 
