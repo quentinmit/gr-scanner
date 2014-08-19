@@ -116,9 +116,10 @@ class trunked_logger(gr.top_block, pubsub):
         pubsub.__init__(self)
         self._options = options
 
-        self._source = osmosdr.source()
+        self._source = osmosdr.source(options.source)
         wat = self._source.get_sample_rates()
         rate = wat.stop() # Maximum available sample rate
+        print "Using sample rate of %d" % rate
         self._source.set_sample_rate(rate)
 
         self._source.set_gain(34)
